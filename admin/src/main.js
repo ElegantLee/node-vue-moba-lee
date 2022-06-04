@@ -4,9 +4,10 @@ import './plugins/element.js'
 import router from './router'
 import http from './http'
 
+import './style.css'
+
 Vue.config.productionTip = false
 Vue.prototype.$http = http
-
 
 new Vue({
   router,

@@ -23,7 +23,7 @@ import AdminUserList from '../views/AdminUserList.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', name: 'login', component: Login },
+  { path: '/login', name: 'login', component: Login, meta: { isPublic: true } },
   {
     path: '/',
     name: 'main',
@@ -58,6 +58,18 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+/* 全局导航守卫 */
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  // console.log(from)
+  /* 要访问的页面不是公开访问的页面，且用户没有登录，则跳转到登录页 */
+  if (!to.meta.isPublic && !localStorage.token) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

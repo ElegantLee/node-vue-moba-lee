@@ -75,7 +75,7 @@ module.exports = app => {
     const totalCount = await req.Model.find(
       searchOptions
     ).countDocuments() // 获取符合条件的总条数
-    console.log(items)
+    // console.log(items)
     res.send({ items, totalCount })
   })
 
@@ -192,7 +192,7 @@ module.exports = app => {
       user.adminWebs = role[0].adminWebs
       // Object.defineProperty(user, 'adminWebs', role[0].adminWebs)
       // console.log(user.adminWebs)
-      console.log(user)
+      // console.log(user)
       res.send(user)
     }
   )

@@ -1,34 +1,16 @@
 <template>
   <!-- 头部 -->
-  <el-container style="height: 100vh;" class="main-page">
-    <el-header style="text-align: right; font-size: 12px">
-      <div class="logo-title">
-        <img src="../assets/img/home/logo1.png" alt="王者荣耀" />
-        <h2 style="padding: 12px;">王者荣耀后台管理系统</h2>
-      </div>
-      <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link" style="color: grey;">
-          {{adminUser.username}}
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="web">前台</el-dropdown-item>
-          <el-dropdown-item command="logout">注销</el-dropdown-item>
-          <el-dropdown-item divided command="github">github</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </el-header>
-    <el-container>
-      <el-aside width="200px" style>
-        <el-menu
-          router
-          unique-opened
-          background-color="#252a40"
-          text-color="#fff"
-          active-text-color="#fdb933"
-          :default-active="$route.path"
-        >
-          <!-- <el-submenu index="1">
+  <el-container style="height: 100vh;">
+    <el-aside width="200px" style>
+      <el-menu
+        router
+        unique-opened
+        background-color="#252a40"
+        text-color="#fff"
+        active-text-color="#fdb933"
+        :default-active="$route.path"
+      >
+        <!-- <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-fold"></i>分类管理
             </template>
@@ -127,32 +109,52 @@
               <el-menu-item index="/admin_users/create">新建管理员</el-menu-item>
               <el-menu-item index="/admin_users/list">管理员列表</el-menu-item>
             </el-menu-item-group>
-          </el-submenu>-->
-          <el-submenu
-            v-for="(menu, index) in menuData"
-            :key="menu._id"
-            :index="index + 1 + ''"
+        </el-submenu>-->
+        <el-submenu
+          v-for="(menu, index) in menuData"
+          :key="menu._id"
+          :index="index + 1 + ''"
+        >
+          <template slot="title">
+            <i :class="menu.icon"></i>
+            {{menu.name}}
+          </template>
+          <el-menu-item-group
+            v-for="group in menu.children"
+            :key="group._id"
           >
-            <template slot="title">
-              <i :class="menu.icon"></i>
-              {{menu.name}}
+            <template slot="title">{{group.name}}</template>
+            <template v-for="webPage in group.children">
+              <el-menu-item
+                v-if="webPage.menu.isShow"
+                :key="webPage._id"
+                :index="webPage.path"
+              >{{webPage.name}}</el-menu-item>
             </template>
-            <el-menu-item-group
-              v-for="group in menu.children"
-              :key="group._id"
-            >
-              <template slot="title">{{group.name}}</template>
-              <template v-for="webPage in group.children">
-                <el-menu-item
-                  v-if="webPage.menu.isShow"
-                  :key="webPage._id"
-                  :index="webPage.path"
-                >{{webPage.name}}</el-menu-item>
-              </template>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
+          </el-menu-item-group>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+    <el-container>
+      <el-header style="text-align: right; font-size: 12px">
+        <div class="logo-title">
+          <img src="../assets/img/home/logo1.png" alt="王者荣耀" />
+          <h2 style="padding: 12px;">王者荣耀后台管理系统</h2>
+        </div>
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link" style="color: grey;">
+            {{adminUser.username}}
+            <i
+              class="el-icon-arrow-down el-icon--right"
+            ></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="web">前台</el-dropdown-item>
+            <el-dropdown-item command="logout">注销</el-dropdown-item>
+            <el-dropdown-item divided command="github">github</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-header>
       <el-main>
         <!-- 默认以组件区分不同的路由 -->
         <router-view :key="$route.path"></router-view>
@@ -214,8 +216,9 @@ export default {
 </script>
 
 <style scoped>
-.main-page {
-  
+.el-menu {
+  height: 100%;
+  width: 100%;
 }
 
 .el-header {

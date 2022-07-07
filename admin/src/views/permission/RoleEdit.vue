@@ -41,9 +41,8 @@
                     >
                       <el-tag
                         :type="methodType[data.right]"
-                        class="method"
                       >{{data.right}}</el-tag>
-                      <span>{{data.desc}}</span>
+                      <span style="margin-left: 5px;">{{data.desc}}</span>
                     </span>
                     <span
                       class="tree-item"
@@ -53,7 +52,7 @@
                         type="info"
                       >{{data.label.replace('页面', '')}}</el-tag>
                       <span
-                        style="color: #606266;margin-left: -5px;"
+                        style="color: #606266;margin-left: 5px;"
                       >页面</span>
                     </span>
                     <span
@@ -62,7 +61,7 @@
                     >
                       <el-tag class="group" type="info">{{data.name}}</el-tag>
                       <span
-                        style="color: #606266;margin-left: -5px;"
+                        style="color: #606266;margin-left: 5px;"
                       >分组</span>
                     </span>
                   </template>
@@ -100,12 +99,12 @@
                         :type="methodType[data.right]"
                         class="method"
                       >{{data.right}}</el-tag>
-                      <span>{{data.desc}}</span>
+                      <span style="margin-left: 5px;">{{data.desc}}</span>
                     </span>
                     <span class="tree-item" v-else>
                       <el-tag type="info">{{data.path}}</el-tag>
                       <span
-                        style="color: #606266;margin-left: -5px;"
+                        style="color: #606266;margin-left: 5px;"
                       >接口</span>
                     </span>
                   </template>
@@ -314,11 +313,12 @@ export default {
     this.fetchApiRights()
     this.fetchAdminWebs()
   },
-  mounted () {
-    this.id && setTimeout(() => {
-      this.defaultAdminWebCheckedKeys = [...this.getDefaultAdminWebCheckedKeys()]
-      this.defaultApiRightCheckedKeys = [...this.getDefaultApiRightCheckedKeys()]
-    }, 500)
+  mounted() {
+    this.id &&
+      setTimeout(() => {
+        this.defaultAdminWebCheckedKeys = [...this.getDefaultAdminWebCheckedKeys()]
+        this.defaultApiRightCheckedKeys = [...this.getDefaultApiRightCheckedKeys()]
+      }, 500)
   }
 }
 </script>

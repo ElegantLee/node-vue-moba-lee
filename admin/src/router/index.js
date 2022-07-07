@@ -322,8 +322,8 @@ const router = new VueRouter({
 
 /* 全局导航守卫 */
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
+  // console.log(to)
+  // console.log(from)
   /* 要访问的页面不是公开访问的页面，且用户没有登录，则跳转到登录页 */
   if (!to.meta.isPublic && !sessionStorage.token) {
     Vue.prototype.$message({ type: 'error', message: '请先登录' })

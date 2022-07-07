@@ -21,7 +21,7 @@ Vue.mixin({
     /* 文件上传时注入token */
     getAuthHeaders() {
       return {
-        Authorization: `Bearer ${localStorage.token || ''}`
+        Authorization: `Bearer ${sessionStorage.token || ''}`
       }
     }
   }

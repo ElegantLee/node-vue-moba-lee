@@ -1,28 +1,16 @@
 <template>
   <div>
     <h1>铭文列表</h1>
-    <el-table :data="runes">
-      <el-table-column
-        prop="_id"
-        label="ID"
-      />
-      <el-table-column
-        prop="name"
-        label="铭文名称"
-      />
-      <el-table-column
-        prop="icon"
-        label="图标"
-      >
+    <el-table :data="runes" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55"></el-table-column>
+      <el-table-column prop="_id" label="ID" />
+      <el-table-column prop="name" label="铭文名称" />
+      <el-table-column prop="icon" label="图标">
         <template slot-scope="scope">
-          <img :src="scope.row.icon" style="height: 3rem;" alt="">
+          <img :src="scope.row.icon" style="height: 3rem;" alt />
         </template>
       </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="180"
-      >
+      <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <el-button
             type="primary"
@@ -62,19 +50,21 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(async() => {
-        await this.$http.delete(`rest/runes/${row._id}`)
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-        this.fetch() // 重新拉取数据
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
+        .then(async () => {
+          await this.$http.delete(`rest/runes/${row._id}`)
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          this.fetch() // 重新拉取数据
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 }

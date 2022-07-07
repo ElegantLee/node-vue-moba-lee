@@ -76,6 +76,11 @@ export default {
               message: '已取消删除'
             })
           })
+      } else {
+        this.$message({
+          message: '请选择要删除的数据',
+          type: 'warning'
+        })
       }
     },
     handleSizeChange(val) {

@@ -10,7 +10,8 @@
       @keywordChange="searchKeyword = $event"
       @searchData="handleSearchedData"
     ></list-form>
-    <el-table :data="items">
+    <el-table :data="items" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID" />
       <el-table-column prop="parent.name" label="上级" />
       <el-table-column prop="name" label="名称" />
@@ -23,11 +24,15 @@
       <el-table-column prop="description" label="描述" />
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
-          <ListOptionBtn :modelName="modelName" :row="scope.row" :removeOne="remove"/>
+          <ListOptionBtn
+            :modelName="modelName"
+            :row="scope.row"
+            :removeOne="remove"
+          />
         </template>
       </el-table-column>
     </el-table>
-     <el-pagination
+    <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage"

@@ -25,7 +25,12 @@
         icon="el-icon-plus"
         @click="$router.push('/' + modelName + '/create')"
       >添加</el-button>
-      <el-button type="danger" icon="el-icon-delete" @click="removeMany">批量删除</el-button>
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        v-permission="{action: 'DELETE', effect: 'disabled'}"
+        @click="removeMany"
+      >批量删除</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -64,7 +69,7 @@ export default {
       if (flag === 'search') {
         if (this.keyword) {
           const res = await this.$http.get(
-            `rest/${ this.modelName }?page=${this.currentPage}&size=${this.size}${this.keyword ? '&search=' + this.keyword : ''}`
+            `rest/${this.modelName}?page=${this.currentPage}&size=${this.size}${this.keyword ? '&search=' + this.keyword : ''}`
           )
           this.$emit('searchData', res.data.items)
         } else {
@@ -72,7 +77,7 @@ export default {
         }
       } else if (flag === 'refresh') {
         const res = await this.$http.get(
-          `rest/${ this.modelName }?page=${this.currentPage}&size=${this.size}${this.keyword ? '&search=' + this.keyword : ''}`
+          `rest/${this.modelName}?page=${this.currentPage}&size=${this.size}${this.keyword ? '&search=' + this.keyword : ''}`
         )
         this.$emit('searchData', res.data.items)
       }

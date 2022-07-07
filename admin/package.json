@@ -8,8 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
+    "D": "^1.0.0",
     "element-ui": "^2.4.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -21,8 +23,10 @@
     "@vue/cli-plugin-router": "^4.4.6",
     "@vue/cli-service": "~4.4.6",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
+    "sass": "^1.52.2",
+    "sass-loader": "^10.1.0",
     "vue-cli-plugin-element": "~1.0.1",
     "vue-template-compiler": "^2.6.11"
   },
@@ -39,11 +43,10 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "vue/name-property-casing": [
-        "error",
-        "kebab-case"
-      ],
-      "space-before-function-paren": "off"
+      "vue/name-property-casing": "off",
+      "space-before-function-paren": "off",
+      "no-debugger": "off", 
+      "no-console": "off"
     }
   },
   "browserslist": [

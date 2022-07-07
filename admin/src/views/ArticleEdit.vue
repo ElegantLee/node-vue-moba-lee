@@ -23,6 +23,7 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 export default {
+  name: 'ArticleEdit',
   props: {
     id: {}
   },

@@ -9,18 +9,14 @@
       <button type="button" class="btn bg-primary">立即下载</button>
     </div>
     <div class="bg-primary pt-3 pb-2">
-      <div class="nav d-flex text-white jc-around pb-1">
-        <div class="nav-item active">
-          <router-link class="nav-link" tag="div" to="/">首页</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">攻略中心</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">赛事中心</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">IP新游</router-link>
+      <div class="nav nav-inverse pb-1 jc-around">
+        <div
+        v-for="(navItem, index) in navItems"
+        :key="navItem.name"
+        :class="{active: active === index}"
+        class="nav-item"
+        @click="active=index">
+          <router-link class="nav-link" tag="div" :to="`/${navItem.uri}`">{{ navItem.name }}</router-link>
         </div>
       </div>
     </div>
@@ -29,8 +25,39 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      active: 0,
+      navItems: [
+        {
+          name: '首页',
+          uri: ''
+        },
+        {
+          name: '攻略中心',
+          uri: 'strategy'
+        },
+        {
+          name: '赛事中心',
+          uri: 'match'
+        },
+        {
+          name: 'IP新游',
+          uri: 'ipng'
+        }
+      ]
+    }
+  }
+}
 </script>
 
-<style>
+<style lang="scss">
+.topbar {
+  /* 固定顶部栏 */
+  // TODO: 考虑兼容性
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 </style>

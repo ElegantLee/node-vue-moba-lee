@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
     set: function (val) {
       return require('bcrypt').hashSync(val, 10)
     }
-  }
+  },
+  role: { type: mongoose.SchemaTypes.ObjectId, ref: 'Role' }
 })
 module.exports = mongoose.model('AdminUser', schema)

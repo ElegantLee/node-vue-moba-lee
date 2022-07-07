@@ -8,6 +8,11 @@
       <el-form-item label="密码">
         <el-input type="password" v-model="model.password"></el-input>
       </el-form-item>
+      <el-form-item label="角色">
+        <el-select v-model="model.role">
+          <el-option v-for="role in roles" :key="role._id" :label="role.name" :value="role._id"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
@@ -17,13 +22,14 @@
 
 <script>
 export default {
+  name: 'AdminUserEdit',
   props: {
     id: {}
   },
   data() {
     return {
       model: {},
-      parents: []
+      roles: []
     }
   },
   methods: {
@@ -45,11 +51,16 @@ export default {
     async fetch() {
       const res = await this.$http.get(`rest/admin_users/${this.id}`)
       this.model = res.data
+    },
+    async fetchRoles() {
+      const roles = await this.$http.get('rest/roles')
+      this.roles = roles.data.items
     }
   },
   created() {
     // 编辑操作时，查询当前编辑的管理员信息
     this.id && this.fetch()
+    this.fetchRoles()
   }
 }
 </script>

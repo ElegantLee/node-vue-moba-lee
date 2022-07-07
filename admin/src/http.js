@@ -3,14 +3,15 @@ import Vue from 'vue'
 import router from './router/index.js'
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/admin/api'
+  baseURL: process.env.VUE_APP_API_URL || '/admin/api'
+  // baseURL: 'http://localhost:3000/admin/api'
 })
 
 http.interceptors.request.use(
   function (config) {
     /* 请求注入token */
-    if (localStorage.token) {
-      config.headers.Authorization = 'Bearer ' + (localStorage.token || '') // Bearer是规范，token可能为空
+    if (sessionStorage.token) {
+      config.headers.Authorization = 'Bearer ' + (sessionStorage.token || '') // Bearer是规范，token可能为空
     }
     return config
   },

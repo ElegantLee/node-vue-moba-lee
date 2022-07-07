@@ -1,6 +1,15 @@
 <template>
   <div>
     <h1>文章列表</h1>
+    <list-form
+      modelName="articles"
+      :currentPage="currentPage"
+      :size="pageSize"
+      :selectionList="selectionList"
+      :removeMany="removeMany"
+      @keywordChange="searchKeyword = $event"
+      @searchData="handleSearchedData"
+    ></list-form>
     <el-table :data="items">
       <el-table-column
         prop="_id"
@@ -16,58 +25,27 @@
         width="180"
       >
         <template slot-scope="scope">
-          <el-button
-            type="primary"
-            size="small"
-            @click="$router.push(`/articles/edit/${scope.row._id}`)"
-          >编辑</el-button>
-          <el-button
-            type="danger"
-            size="small"
-            @click="remove(scope.row)"
-          >删除</el-button>
+          <ListOptionBtn :modelName="modelName" :row="scope.row" :removeOne="remove"/>
         </template>
       </el-table-column>
     </el-table>
+     <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totalSize"
+    ></el-pagination>
   </div>
 </template>
 
 <script>
+import listPageMixin from '@/mixins/listPageMixin.js'
 export default {
-  data() {
-    return {
-      items: []
-    }
-  },
-  created() {
-    this.fetch()
-  },
-  methods: {
-    /* 获取数据 */
-    async fetch() {
-      const res = await this.$http.get('rest/articles')
-      this.items = res.data
-    },
-    /* 删除数据 */
-    async remove(row) {
-      this.$confirm(`是否确定要删除"${row.title}"?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async() => {
-        await this.$http.delete(`rest/articles/${row._id}`)
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-        this.fetch() // 重新拉取数据
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
-      })
-    }
-  }
+  name: 'ArticleList',
+  mixins: [listPageMixin]
 }
 </script>

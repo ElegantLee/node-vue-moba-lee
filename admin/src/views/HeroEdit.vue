@@ -2,7 +2,7 @@
   <div class="about">
     <h1>{{ id ? "编辑" : "新建" }}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-tabs value="skills" type="border-card">
+      <el-tabs value="basic" type="border-card">
         <el-tab-pane label="基本信息" name="basic">
           <el-form-item label="名称">
             <el-input v-model="model.name"></el-input>
@@ -15,7 +15,19 @@
               :show-file-list="false"
               :on-success="afterUpload"
             >
-              <img v-if="model.avator" :src="model.avator" class="avatar" />
+              <img v-if="model.avatar" :src="model.avatar" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="Banner">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadUrl"
+              :headers="getAuthHeaders()"
+              :show-file-list="false"
+              :on-success="res => $set(model, 'banner', res.url)"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -80,6 +92,12 @@
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
+              </el-form-item>
               <el-form-item label="描述">
                 <el-input v-model="item.description" type="textarea"></el-input>
               </el-form-item>
@@ -88,6 +106,26 @@
               </el-form-item>
               <el-form-item>
                 <el-button size="small" type="danger" @click="model.skills.splice(i, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="最佳搭档" name="partners">
+          <el-button type="text" @click="model.partners.push({})">
+            <i class="el-icon-plus"></i>添加
+          </el-button>
+          <el-row type="felx" style="flex-wrap: wrap">
+            <el-col :md="12" v-for="(item, i) in model.partners" :key="i">
+              <el-form-item label="英雄">
+                <el-select filterable v-model="model.partners[i].hero">
+                  <el-option v-for="hero in heroes" :key="hero._id" :value="hero._id" :label="hero.name"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="model.partners[i].description" type="textarea"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button size="small" type="danger" @click="model.partners.splice(i, 1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -102,6 +140,7 @@
 
 <script>
 export default {
+  name: 'HeroEdit',
   props: {
     id: {}
   },
@@ -109,17 +148,21 @@ export default {
     return {
       model: {
         name: '',
-        avator: '',
+        avatar: '',
+        nanner: '',
         scores: {
           difficult: 0,
           skills: 0,
           attack: 0,
           survive: 0
         },
-        skills: []
+        skills: [],
+        // TODO: 最佳搭档的option展示有问题
+        partners: []
       },
       categories: [],
-      items: []
+      items: [],
+      heroes: []
     }
   },
   methods: {
@@ -153,9 +196,14 @@ export default {
       const res = await this.$http.get(`rest/items`)
       this.items = res.data
     },
+    // 获取所有英雄
+    async fetchHeroes() {
+      const res = await this.$http.get(`rest/heroes`)
+      this.heroes = res.data
+    },
     // 上传英雄头像
     afterUpload(res) {
-      this.$set(this.model, 'avator', res.url)
+      this.$set(this.model, 'avatar', res.url)
       // this.model.icon = res.url
     }
   },
@@ -164,10 +212,10 @@ export default {
     this.id && this.fetch()
     this.fetchCategories()
     this.fetchItems()
+    this.fetchHeroes()
   }
 }
 </script>
 
 <style>
-
 </style>

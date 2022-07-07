@@ -16,7 +16,16 @@ body {
   -webkit-font-smoothing: antialiased; // 更细的像素视觉效果
 }
 a {
-  color: #999;
+  color: map-get($map: $colors, $key: 'dark');
+  text-decoration: none;
+}
+
+a:visited {
+  color: map-get($map: $colors, $key: 'grey');
+}
+
+p {
+  line-height: 1.5rem;
 }
 
 /* text and background color---定义字体和背景颜色 */
@@ -42,6 +51,14 @@ a {
   }
 }
 
+/* text overflow---文字溢出时的样式 */
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* flex---flex布局相关 */
 .d-flex {
   display: flex;
@@ -63,7 +80,7 @@ a {
   }
 }
 .flex-grow-1 {
-  flex-grow: 1;
+  flex-grow: 1; // 规定了 flex-grow 项在 flex 容器中分配剩余空间的相对比例
 }
 
 /* width, height---常用宽度和高度定义 */
@@ -110,15 +127,40 @@ a {
   border-radius: .1538rem;
   font-size: map-get($font-sizes, 'md') * $base-font-size;
   padding: .2rem .6rem;
+  &.btn-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: map-get($colors, 'light');
+    border: .9997px solid #eceef0;
+    padding: .8rem 1rem;
+    i {
+      color: map-get($colors, 'primary');
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-right: .5rem;
+    }
+  }
 }
 
 /* 导航菜单 */
 .nav {
+  display: flex;
+  // justify-content: space-around;
   .nav-item {
     border-bottom: 3.0004px solid transparent; // 没有active时加上边框方便文字对齐
     padding-bottom: .2rem; // border与文字的间距
     &.active {
-      border-bottom: 3.0004px solid #fff; // active时底部有边框颜色
+      color: map-get($map: $colors, $key: 'primary');
+      border-bottom-color: map-get($map: $colors, $key: 'primary'); // active时底部有边框颜色
+    }
+  }
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($map: $colors, $key: 'white');
+      &.active {
+        border-bottom-color: map-get($map: $colors, $key: 'white');
+      }
     }
   }
 }
@@ -169,13 +211,61 @@ a {
 	  height: 1.5385rem;
     background-position: 0 96.207%;
   }
-  // &.sprite-bbjs {
-
-  // }
+  &.sprite-bbjs {
+    width: 2rem;
+    height: 2rem;
+    background: url('../images/nav/version-icon.png') no-repeat center;
+    background-size: 2rem;
+  }
+  &.sprite-djhj {
+    width: 3rem;
+    height: 2rem;
+    background: url('../images/nav/djhj.png') no-repeat center;
+    background-size: 3rem;
+  }
+  &.sprite-IP {
+    width: 3rem;
+    height: 2rem;
+    background: url('../images/nav/ipgc.png') no-repeat center;
+    background-size: 2.5rem;
+  }
+  &.sprite-cyhdy {
+    width: 2.5rem;
+    height: 2rem;
+    background: url('../images/nav/cyhdy.png') no-repeat center;
+    background-size: 2.5rem;
+  }
   &.sprite-sq {
     width: .7692rem;
 	  height: .7692rem;
     background-position: 38.577% 52.076%;
+    transform: rotate(180deg);
+  }
+  &.sprite-video {
+    width: .9231rem;
+    height: .6923rem;
+    background-position: 32.369% 52.578%;
+  }
+  &.sprite-lywzk {
+    width: 1.9231rem;
+    height: 1.9231rem;
+    background-position: 36.429% 97.209%;
+  }
+  &.sprite-video {
+    width: 1rem;
+	  height: .8462rem;
+    background-position: 0.138% 56.532%;
+  }
+  &.sprite-bai {
+    width: 1.0769rem;
+    height: 1.0769rem;
+    background-position: 0 45.238%;
   }
 }
 
+/* border---边框相关的样式 */
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: .9997px solid $border-color;
+  }
+}

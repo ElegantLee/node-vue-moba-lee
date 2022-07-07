@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(e,t,n){"use strict";n.r(t);var a=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},c=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"page-article"},[n("h1",[e._v("文章详情页")])])}],l=n("2877"),r={},s=Object(l["a"])(r,a,c,!1,null,null,null);t["default"]=s.exports}}]);
+//# sourceMappingURL=about.1337e371.js.map

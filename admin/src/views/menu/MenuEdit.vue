@@ -1,9 +1,18 @@
 <template>
   <div class="about">
     <h1>{{ id ? "编辑" : "新建" }}侧边栏菜单</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
+    <el-form
+      :model="model"
+      :rules="rules"
+      ref="MenuForm"
+      label-width="120px"
+      @submit.native.prevent="save"
+    >
       <el-form-item label="上一级菜单">
-        <el-select v-model="model.parent">
+        <el-select
+          v-model="model.parent"
+          placeholder="一级菜单不选"
+        >
           <el-option
             v-for="item in parents"
             :label="item.name"
@@ -12,7 +21,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="名称">
+      <el-form-item prop="name" label="名称">
         <el-input v-model="model.name" placeholder="输入菜单名称"></el-input>
       </el-form-item>
       <el-form-item label="图标">
@@ -32,9 +41,14 @@
             <span>{{ icon }}</span>
           </el-option>
         </el-select>
-        <el-switch style="display: inline-block; padding-left: 40px;" v-model="model.isShow" active-color="#409eff" inactive-color="#dcdfe6"></el-switch>
+        <el-switch
+          style="display: inline-block; padding-left: 40px;"
+          v-model="model.isShow"
+          active-color="#409eff"
+          inactive-color="#dcdfe6"
+        ></el-switch>
       </el-form-item>
-      <el-form-item label="描述">
+      <el-form-item prop="description" label="描述">
         <el-input type="textarea" v-model="model.description"></el-input>
       </el-form-item>
       <el-form-item>
@@ -55,22 +69,35 @@ export default {
     return {
       model: {},
       parents: [],
-      iconArr
+      iconArr,
+      rules: {
+        name: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
+        description: [{ required: true, message: '请输入菜单描述', trigger: 'blur' }]
+      }
     }
   },
   methods: {
     // 新建侧边栏菜单
     async save() {
-      // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/menus/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/menus', this.model)
-      }
-      this.$router.push('/menus/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['MenuForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/menus/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/menus', this.model)
+          }
+          this.$router.push('/menus/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            message: '表单信息不完整',
+            type: 'error'
+          })
+          return false
+        }
       })
     },
     // 根据id查询侧边栏菜单

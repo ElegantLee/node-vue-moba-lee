@@ -1,18 +1,24 @@
 <template>
   <div class="about">
     <h1>{{ id ? "编辑" : "新建" }}分类</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="上一级分类">
+    <el-form
+      :model="model"
+      :rules="rules"
+      ref="CategoryForm"
+      label-width="120px"
+      @submit.native.prevent="save"
+    >
+      <el-form-item prop="parent" label="上一级分类">
         <el-select v-model="model.parent">
           <el-option
-          v-for="item in parents"
-          :label="item.name"
-          :value="item._id"
-          :key="item._id">
-          </el-option>
+            v-for="item in parents"
+            :label="item.name"
+            :value="item._id"
+            :key="item._id"
+          ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="名称">
+      <el-form-item prop="name" label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item>
@@ -31,22 +37,34 @@ export default {
   data() {
     return {
       model: {},
-      parents: []
+      parents: [],
+      rules: {
+        name: [{ required: true, message: '请输入分类名称', trigger: 'blur' }]
+      }
     }
   },
   methods: {
     // 新建分类
     async save() {
-      // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/categories/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/categories', this.model)
-      }
-      this.$router.push('/categories/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['CategoryForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/categories/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/categories', this.model)
+          }
+          this.$router.push('/categories/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '表单信息不完整'
+          })
+          return false
+        }
       })
     },
     // 根据id查询分类

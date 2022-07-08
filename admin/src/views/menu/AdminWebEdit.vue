@@ -1,19 +1,26 @@
 <template>
   <div class="about">
     <h1>{{ id ? "编辑" : "新建" }}后台页面</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="名称">
+    <el-form
+      :model="model"
+      :rules="rules"
+      ref="AdminWebForm"
+      label-width="120px"
+      @submit.native.prevent="save"
+    >
+      <el-form-item prop="name" label="名称">
         <el-input v-model="model.name" placeholder="以 页面 两个字结尾"></el-input>
       </el-form-item>
-      <el-form-item label="页面地址">
+      <el-form-item prop="path" label="页面地址">
         <el-input v-model="model.path" placeholder="输入页面的路由地址"></el-input>
       </el-form-item>
-      <el-form-item label="所属菜单">
+      <el-form-item prop="menu" label="所属菜单">
         <el-select
           filterable
           clearable
           v-model="model.menu"
           placeholder="一个菜单对应一个页面"
+          @change="bindMenuChange"
         >
           <el-option
             v-for="item in menuList"
@@ -24,7 +31,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="页面权限">
+      <el-form-item prop="rights" label="页面权限">
         <el-select multiple v-model="model.rights" placeholder="选择权限">
           <el-option
             v-for="(method, methodName, index) in apiMethods"
@@ -34,7 +41,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="描述">
+      <el-form-item prop="description" label="描述">
         <el-input
           type="textarea"
           v-model="model.description"
@@ -78,23 +85,47 @@ export default {
         description: ''
       },
       menus: [],
-      apiMethods: { '查看 GET': 'GET', '新增 POST': 'POST', '修改 PUT': 'PUT', '删除 DELETE': 'DELETE', '搜索 SEARCH': 'SEARCH' }
+      apiMethods: { '查看 GET': 'GET', '新增 POST': 'POST', '修改 PUT': 'PUT', '删除 DELETE': 'DELETE', '搜索 SEARCH': 'SEARCH' },
+      rules: {
+        name: [{ required: true, message: '请输入页面名称', trigger: 'blur' }],
+        path: [{ required: true, message: '请输入页面的路由地址', trigger: 'blur' }],
+        menu: [{ required: true, message: '请选择一个菜单', trigger: 'change' }],
+        rights: [{ required: true, message: '请选择页面拥有的操作', trigger: 'change' }],
+        description: [{ required: true, message: '请输入页面描述', trigger: 'blur' }]
+      }
     }
   },
   methods: {
     // 新建页面权限
     async save() {
-      // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/admin_webs/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/admin_webs', this.model)
-      }
-      this.$router.push('/admin_webs/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['AdminWebForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/admin_webs/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/admin_webs', this.model)
+          }
+          this.$router.push('/admin_webs/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '表单信息不完整'
+          })
+          return false
+        }
       })
+    },
+    bindMenuChange(menus) {
+      if (menus.length !== 1) {
+        this.$message({
+          message: '只能选择一个菜单',
+          type: 'warining'
+        })
+      }
     },
     // 根据id查询页面权限
     async fetch() {

@@ -1,7 +1,13 @@
 <template>
   <div class="about">
     <h1>{{ id ? "编辑" : "新建" }}角色</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
+    <el-form
+      :model="model"
+      :rules="rules"
+      ref="RoleForm"
+      label-width="120px"
+      @submit.native.prevent="save"
+    >
       <el-form-item label="名称" prop="name">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -200,22 +206,35 @@ export default {
         DELETE: 'danger'
       },
       defaultAdminWebCheckedKeys: [], // 编辑角色时，存储角色已有的权限数据
-      defaultApiRightCheckedKeys: []
+      defaultApiRightCheckedKeys: [],
+      rules: {
+        name: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
+        description: [{ required: true, message: '请输入角色描述', trigger: 'blur' }]
+      }
     }
   },
   methods: {
     // 新建角色
     async save() {
-      // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/roles/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/roles', this.model)
-      }
-      this.$router.push('/roles/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['RoleForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/roles/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/roles', this.model)
+          }
+          this.$router.push('/roles/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '表单信息不完整'
+          })
+          return false
+        }
       })
     },
     // 根据id查询角色

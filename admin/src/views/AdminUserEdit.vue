@@ -58,15 +58,25 @@ export default {
     // 新建管理员
     async save() {
       // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/admin_users/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/admin_users', this.model)
-      }
-      this.$router.push('/admin_users/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['AdminUserForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/admin_users/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/admin_users', this.model)
+          }
+          this.$router.push('/admin_users/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '表单信息不完整'
+          })
+          return false
+        }
       })
     },
     // 根据id查询管理员

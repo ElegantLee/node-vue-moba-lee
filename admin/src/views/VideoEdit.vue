@@ -1,25 +1,36 @@
 <template>
   <div class="video-edit">
     <h1>{{ id ? '编辑' : '新建' }}视频</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="所属分类">
+    <el-form
+      :model="model"
+      :rules="rules"
+      ref="VideoForm"
+      label-width="120px"
+      @submit.native.prevent="save"
+    >
+      <el-form-item prop="category" label="所属分类">
         <el-select v-model="model.category">
-          <el-option v-for="category in categories" :label="category.name" :value="category._id" :key="category._id"></el-option>
+          <el-option
+            v-for="category in categories"
+            :label="category.name"
+            :value="category._id"
+            :key="category._id"
+          ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="标题">
+      <el-form-item prop="title" label="标题">
         <el-input type="textarea" v-model="model.title"></el-input>
       </el-form-item>
-      <el-form-item label="链接">
+      <el-form-item prop="url" label="链接">
         <el-input v-model="model.url"></el-input>
       </el-form-item>
-      <el-form-item label="点击率">
+      <el-form-item prop="fre" label="点击率">
         <el-input v-model="model.fre"></el-input>
       </el-form-item>
-      <el-form-item label="发布日期">
+      <el-form-item prop="date" label="发布日期">
         <el-input type="date" v-model="model.date"></el-input>
       </el-form-item>
-      <el-form-item label="封面">
+      <el-form-item prop="cover" label="封面">
         <el-upload
           class="avatar-uploader"
           :action="uploadUrl"
@@ -47,22 +58,39 @@ export default {
   data() {
     return {
       model: {},
-      categories: []
+      categories: [],
+      rules: {
+        category: [{required: true, message: '请选择至少一个分类', trigger: 'change'}],
+        title: [{ required: true, message: '请输入视频标题', trigger: 'blur' }],
+        url: [{ required: true, message: '请输入视频链接', trigger: 'blur' }],
+        fre: [{ required: true, message: '请输入点击率', trigger: 'blur' }],
+        date: [{ type: 'date', required: true, message: '请输入视频发布日期', trigger: 'change' }],
+        cover: [{ required: true, message: '请上传视频封面', trigger: 'blur' }]
+      }
     }
   },
   methods: {
     // 新建视频
     async save() {
-      // let res = null; // eslint-disable-line
-      if (this.id) {
-        await this.$http.put(`rest/videoes/${this.id}`, this.model)
-      } else {
-        await this.$http.post('rest/videoes', this.model)
-      }
-      this.$router.push('/videoes/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
+      this.$refs['VideoForm'].validate(async valid => {
+        if (valid) {
+          if (this.id) {
+            await this.$http.put(`rest/videoes/${this.id}`, this.model)
+          } else {
+            await this.$http.post('rest/videoes', this.model)
+          }
+          this.$router.push('/videoes/list')
+          this.$message({
+            type: 'success',
+            message: '保存成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '表单信息不完整'
+          })
+          return false
+        }
       })
     },
     // 根据id查询视频

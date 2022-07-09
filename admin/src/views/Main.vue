@@ -197,7 +197,7 @@ export default {
       } else if (command === 'web') {
         this.$router.push()
       } else if (command === 'github') {
-        window.open('')
+        window.open('https://github.com/ElegantLee/node-vue-moba-lee/tree/main')
       }
     },
     /* 获取管理员信息 */

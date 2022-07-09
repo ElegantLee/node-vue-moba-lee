@@ -19,7 +19,8 @@ Vue.config.productionTip = false
 
 import axios from 'axios'
 
-console.log(process.env)
+// console.log(process.env)
+
 Vue.prototype.$http = axios.create({
   baseURL: process.env.VUE_APP_API_URL || '/web/api'
   // baseURL: 'http://localhost:3000/web/api'

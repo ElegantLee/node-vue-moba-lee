@@ -82,7 +82,7 @@ export default {
     // 根据id查询分类
     async fetch() {
       const res = await this.$http.get(`rest/articles/${this.id}`)
-      this.model = res.data.items
+      this.model = {...res.data}
     },
     // 根据id查询父级分类
     async fetchCategories() {

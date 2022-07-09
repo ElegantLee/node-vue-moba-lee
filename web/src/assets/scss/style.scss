@@ -1,0 +1,271 @@
+@import './variables'; // 引用自定义变量
+
+/* reset style---样式重置 */
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+html {
+  font-size: 13px;
+}
+body {
+  margin: 0;
+  font-family: PingFangSC-Regular, "Helvetica Neue", Helvetica, STHeiTi, 微软雅黑, sans-serif;
+  line-height: 1.2rem;
+  background: #F1F1F1;
+  -webkit-font-smoothing: antialiased; // 更细的像素视觉效果
+}
+a {
+  color: map-get($map: $colors, $key: 'dark');
+  text-decoration: none;
+}
+
+a:visited {
+  color: map-get($map: $colors, $key: 'grey');
+}
+
+p {
+  line-height: 1.5rem;
+}
+
+/* text and background color---定义字体和背景颜色 */
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+/* text---定义字体对齐方式 */
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important; // 强制应用
+  }
+}
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+/* text overflow---文字溢出时的样式 */
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* flex---flex布局相关 */
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column; // 纵向排列
+}
+.flex-wrap {
+  flex-wrap: wrap; // 换行
+}
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+.flex-grow-1 {
+  flex-grow: 1; // 规定了 flex-grow 项在 flex 容器中分配剩余空间的相对比例
+}
+
+/* width, height---常用宽度和高度定义 */
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+/* spacing--常用边距 */
+@each $typeKey, $type in $spacing-types {
+  @each $sizeKey, $size in $spacing-sizes {
+    // .m-1 { margin: 1rem; }
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+  @each $sizeKey, $size in $spacing-sizes {
+    // .mx-1 { margin-left: 1rem; margin-right: 1rem }
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+    // .my-1 { margin-top: 1rem; margin-bottom: 1rem; }
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      // mt-1 { margin-top: 1rem; }
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size
+      }
+    }
+  }
+}
+
+/* button---按钮样式 */
+.btn {
+  border: none;
+  border-radius: .1538rem;
+  font-size: map-get($font-sizes, 'md') * $base-font-size;
+  padding: .2rem .6rem;
+  &.btn-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: map-get($colors, 'light');
+    border: .9997px solid #eceef0;
+    padding: .8rem 1rem;
+    i {
+      color: map-get($colors, 'primary');
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-right: .5rem;
+    }
+  }
+}
+
+/* 导航菜单 */
+.nav {
+  display: flex;
+  // justify-content: space-around;
+  .nav-item {
+    border-bottom: 3.0004px solid transparent; // 没有active时加上边框方便文字对齐
+    padding-bottom: .2rem; // border与文字的间距
+    &.active {
+      color: map-get($map: $colors, $key: 'primary');
+      border-bottom-color: map-get($map: $colors, $key: 'primary'); // active时底部有边框颜色
+    }
+  }
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($map: $colors, $key: 'white');
+      &.active {
+        border-bottom-color: map-get($map: $colors, $key: 'white');
+      }
+    }
+  }
+}
+
+
+/* sprite---精灵图相关 */
+.sprite {
+  background: url(../images/index.png) no-repeat 0 0; // 0 0 左上角对齐
+  background-size: 28.8462rem;
+  display: inline-block;
+  &.sprite-blz {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-gsz {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 90.483% 15.614%;
+  }
+  &.sprite-zbsc {
+    width: 1.4615rem;
+    height: 1.6923rem;
+    background-position: 36.746% 0.924%;
+  }
+  &.sprite-tyf {
+    width: 1.5385rem;
+	  height: 1.5385rem;
+    background-position: 10.408% 15.517%;
+  }
+  &.sprite-xrzq {
+    width: 1.5385rem;
+	  height: 1.6154rem;
+    background-position: 89.733% 1.266%;
+  }
+  &.sprite-rycc {
+    width: 1.8462rem;
+	  height: 1.5385rem;
+    background-position: 36.467% 15.287%;
+  }
+  &.sprite-wzyd {
+    width: 1.8462rem;
+	  height: 1.8462rem;
+    background-position: 63.3% 0.927%;
+  }
+  &.sprite-gzh {
+    width: 1.8462rem;
+	  height: 1.5385rem;
+    background-position: 0 96.207%;
+  }
+  &.sprite-bbjs {
+    width: 2rem;
+    height: 2rem;
+    background: url('../images/nav/version-icon.png') no-repeat center;
+    background-size: 2rem;
+  }
+  &.sprite-djhj {
+    width: 3rem;
+    height: 2rem;
+    background: url('../images/nav/djhj.png') no-repeat center;
+    background-size: 3rem;
+  }
+  &.sprite-IP {
+    width: 3rem;
+    height: 2rem;
+    background: url('../images/nav/ipgc.png') no-repeat center;
+    background-size: 2.5rem;
+  }
+  &.sprite-cyhdy {
+    width: 2.5rem;
+    height: 2rem;
+    background: url('../images/nav/cyhdy.png') no-repeat center;
+    background-size: 2.5rem;
+  }
+  &.sprite-sq {
+    width: .7692rem;
+	  height: .7692rem;
+    background-position: 38.577% 52.076%;
+    transform: rotate(180deg);
+  }
+  &.sprite-video {
+    width: .9231rem;
+    height: .6923rem;
+    background-position: 32.369% 52.578%;
+  }
+  &.sprite-lywzk {
+    width: 1.9231rem;
+    height: 1.9231rem;
+    background-position: 36.429% 97.209%;
+  }
+  &.sprite-video {
+    width: 1rem;
+	  height: .8462rem;
+    background-position: 0.138% 56.532%;
+  }
+  &.sprite-bai {
+    width: 1.0769rem;
+    height: 1.0769rem;
+    background-position: 0 45.238%;
+  }
+}
+
+/* border---边框相关的样式 */
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: .9997px solid $border-color;
+  }
+}

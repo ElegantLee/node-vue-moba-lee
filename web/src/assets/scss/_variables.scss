@@ -1,0 +1,67 @@
+/* colors---定义颜色变量 */
+$colors: (
+  "primary": #db9e3f, // 主色调
+  "info": #4b67af, // 幻灯片翻页激活时原点的颜色
+  "blue": #4394e4, // 文章详情页标题颜色
+  "blue-1": #1f3695, // 英雄详情页技能颜色
+  "attack": #791a16, // 英雄详情页攻击颜色
+  "survive": #33332c, // 英雄详情页攻击颜色
+  "white": #FFF, // 首页
+  "light": #f9f9f9, // 
+  "lignt-1": #d4d9de,
+  "red": #ff3636,
+  "grey": #999,
+  "grey-light": #7a7a80,
+  "grey-1": #666,
+  "dark-1": #343440,
+  "dark": #212222,
+  "black": #000,
+
+);
+$border-color: map-get($colors, 'lignt-1');
+
+/* font-size---定义字体大小 */
+$base-font-size: 1rem;
+$font-sizes: (
+  xs: .7692,  // 10px
+  sm: .9231,  // 12px
+  md: 1,  // 13px
+  lg: 1.0769, // 14px
+  xl: 1.2308  // 16px
+);
+
+/* flex布局相关变量 */
+$flex-jc: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+);
+$flex-ai: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch
+);
+
+/* spacing---常用边距定义 */
+$spacing-types: (
+  m: margin,
+  p: padding
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3
+);

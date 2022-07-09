@@ -14,8 +14,8 @@
       <!-- Optional controls -->
       <div class="swiper-pagination pagination-home text-right px-3 pb-1" slot="pagination"></div>
       <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-      <div class="swiper-scrollbar" slot="scrollbar"></div>-->
+      <div class="swiper-button-next" slot="button-next"></div> -->
+      <div class="swiper-scrollbar" slot="scrollbar"></div>
     </swiper>
     <!-- end of swiper -->
     <div class="nav-icons bg-white mt-3 text-center pt-3 text-grey" :class="{ 'nav-collapse': navCollapse}">

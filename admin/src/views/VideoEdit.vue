@@ -28,7 +28,7 @@
         <el-input v-model="model.fre"></el-input>
       </el-form-item>
       <el-form-item prop="date" label="发布日期">
-        <el-input type="date" v-model="model.date"></el-input>
+        <el-date-picker type="date" placeholder="选择发布日期" v-model="model.date"></el-date-picker>
       </el-form-item>
       <el-form-item prop="cover" label="封面">
         <el-upload
@@ -64,7 +64,7 @@ export default {
         title: [{ required: true, message: '请输入视频标题', trigger: 'blur' }],
         url: [{ required: true, message: '请输入视频链接', trigger: 'blur' }],
         fre: [{ required: true, message: '请输入点击率', trigger: 'blur' }],
-        date: [{ type: 'date', required: true, message: '请输入视频发布日期', trigger: 'change' }],
+        date: [{ required: true, message: '请输入视频发布日期', trigger: 'change' }],
         cover: [{ required: true, message: '请上传视频封面', trigger: 'blur' }]
       }
     }
@@ -96,7 +96,7 @@ export default {
     // 根据id查询视频
     async fetch() {
       const res = await this.$http.get(`rest/videoes/${this.id}`)
-      this.model = res.data
+      this.model = {...res.data}
     },
     // 上传图片
     afterUpload(res) {
@@ -105,7 +105,7 @@ export default {
     },
     async fetchCategories() {
       const res = await this.$http.get('rest/categories')
-      this.categories = res.data
+      this.categories = res.data.items
     }
   },
   created() {

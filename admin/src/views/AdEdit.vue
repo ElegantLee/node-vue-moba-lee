@@ -51,7 +51,7 @@
               <el-button
                 size="small "
                 type="danger"
-                @click="model.items.splice(i, 1)"
+                @click="model.items.splice(index, 1)"
               >删除</el-button>
             </el-form-item>
           </el-col>

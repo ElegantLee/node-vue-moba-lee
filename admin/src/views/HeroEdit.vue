@@ -95,7 +95,7 @@
           <el-form-item prop="teamTips" label="团战思路">
             <el-input type="textarea" v-model="model.teamTips"></el-input>
           </el-form-item>
-          <el-form-item prop="difficult" label="难度">
+          <el-form-item prop="scores.difficult" label="难度">
             <el-rate
               v-model="model.scores.difficult"
               :max="10"
@@ -103,7 +103,7 @@
               style="margin-top: 0.6rem"
             ></el-rate>
           </el-form-item>
-          <el-form-item prop="skills" label="技能">
+          <el-form-item prop="scores.skills" label="技能">
             <el-rate
               v-model="model.scores.skills"
               :max="10"
@@ -111,7 +111,7 @@
               style="margin-top: 0.6rem"
             ></el-rate>
           </el-form-item>
-          <el-form-item prop="attack" label="攻击">
+          <el-form-item prop="scores.attack" label="攻击">
             <el-rate
               v-model="model.scores.attack"
               :max="10"
@@ -119,7 +119,7 @@
               style="margin-top: 0.6rem"
             ></el-rate>
           </el-form-item>
-          <el-form-item prop="survive" label="生存">
+          <el-form-item prop="scores.survive" label="生存">
             <el-rate
               v-model="model.scores.survive"
               :max="10"
@@ -298,10 +298,10 @@ export default {
         usageTips: [{ required: true, message: '请输入使用技巧', trigger: 'blur' }],
         battleTips: [{ required: true, message: '请输对抗技巧', trigger: 'blur' }],
         teamTips: [{ required: true, message: '请输入团战思路', trigger: 'blur' }],
-        difficult: [{ required: true, message: '请选择难度', trigger: 'blur' }],
-        skills: [{ required: true, message: '请选择技能', trigger: 'blur' }],
-        attack: [{ required: true, message: '请选择攻击', trigger: 'blur' }],
-        survive: [{ required: true, message: '请选择生存', trigger: 'blur' }]
+        difficult: [{ required: true, message: '请选择难度', trigger: 'change' }],
+        skills: [{ required: true, message: '请选择技能', trigger: 'change' }],
+        attack: [{ required: true, message: '请选择攻击', trigger: 'change' }],
+        survive: [{ required: true, message: '请选择生存', trigger: 'change' }]
       }
     }
   },

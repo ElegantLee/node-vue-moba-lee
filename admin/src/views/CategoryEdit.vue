@@ -75,7 +75,7 @@ export default {
     // 根据id查询父级分类
     async fetchParents() {
       const res = await this.$http.get(`rest/categories`)
-      this.parents = res.data
+      this.parents = res.data.items
     }
   },
   created() {

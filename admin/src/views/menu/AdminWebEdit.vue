@@ -80,7 +80,7 @@ export default {
       model: {
         name: '',
         path: '',
-        menu: {},
+        menu: '',
         rights: [],
         description: ''
       },
@@ -103,6 +103,13 @@ export default {
           if (this.id) {
             await this.$http.put(`rest/admin_webs/${this.id}`, this.model)
           } else {
+            if (this.model.menu.length === 0) {
+              this.$message({
+                message: '请选择一个菜单项',
+                type: 'warning'
+              })
+              return false
+            }
             await this.$http.post('rest/admin_webs', this.model)
           }
           this.$router.push('/admin_webs/list')

@@ -28,11 +28,15 @@ export default {
     },
     /* 删除数据 */
     async remove(row) {
-      this.$confirm(`是否确定要删除"${row.name}"?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
+      this.$confirm(
+        `是否确定要删除"${row.name ? row.name : row.path}"?`,
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      )
         .then(async () => {
           await this.$http.delete(`rest/${this.modelName}/${row._id}`)
           this.$message({

@@ -77,7 +77,7 @@ export default {
     return {
       model: {
         path: '',
-        category: {},
+        category: '',
         methods: [],
         description: ''
       },

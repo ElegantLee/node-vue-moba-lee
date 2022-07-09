@@ -3,13 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0"
+    />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <!-- 引入CDN样式---css -->
+    <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
+    <link rel="stylesheet" href="<%=css%>" />
+    <% } %>
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
       body {
-        font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei,
-          sans-serif !important;
+        font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue,
+          Helvetica, Arial, PingFang SC, Hiragino Sans GB,
+          Microsoft YaHei, sans-serif !important;
         font-size: 30px;
       }
     </style>
@@ -17,11 +25,17 @@
   <body>
     <noscript>
       <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to
-        continue.</strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %>
+        doesn't work properly without JavaScript enabled. Please
+        enable it to continue.</strong
       >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+    <!-- 引入CDN的脚本---js -->
+    <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%=js%>"></script>
+    <% } %>
   </body>
 </html>

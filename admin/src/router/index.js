@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
 // import CategoryEdit from '../views/CategoryEdit.vue'
 // import CategoryList from '../views/CategoryList.vue'
 
@@ -46,186 +46,186 @@ const routerMapping = {
   '/categories/create': {
     path: '/categories/create',
     name: 'CategoryCreate',
-    component: () => import('../views/CategoryEdit.vue')
+    component: () => import(/* webpackChunkName: "Category" */ '../views/CategoryEdit.vue')
   },
   '/categories/list': {
     path: '/categories/list',
     name: 'CategoryList',
-    component: () => import('../views/CategoryList.vue')
+    component: () => import(/* webpackChunkName: "Category" */ '../views/CategoryList.vue')
   },
   '/categories/edit/:id': {
     path: '/categories/edit/:id',
     name: 'CategoryEdit',
     props: true,
-    component: () => import('../views/CategoryEdit.vue')
+    component: () => import(/* webpackChunkName: "Category" */ '../views/CategoryEdit.vue')
   },
 
   '/items/create': {
     path: '/items/create',
     name: 'ItemCreate',
-    component: () => import('../views/ItemEdit.vue')
+    component: () => import(/* webpackChunkName: "Item" */ '../views/ItemEdit.vue')
   },
   '/items/list': {
     path: '/items/list',
     name: 'ItemList',
-    component: () => import('../views/ItemList.vue')
+    component: () => import(/* webpackChunkName: "Item" */ '../views/ItemList.vue')
   },
   '/items/edit/:id': {
     path: '/items/edit/:id',
     name: 'ItemEdit',
     props: true,
-    component: () => import('../views/ItemEdit.vue')
+    component: () => import(/* webpackChunkName: "Item" */ '../views/ItemEdit.vue')
   },
 
   '/heroes/create': {
     path: '/heroes/create',
     name: 'HeroCreate',
-    component: () => import('../views/HeroEdit.vue')
+    component: () => import(/* webpackChunkName: "Hero" */ '../views/HeroEdit.vue')
   },
   '/heroes/list': {
     path: '/heroes/list',
     name: 'HeroList',
-    component: () => import('../views/HeroList.vue')
+    component: () => import(/* webpackChunkName: "Hero" */ '../views/HeroList.vue')
   },
   '/heroes/edit/:id': {
     path: '/heroes/edit/:id',
     name: 'HeroEdit',
     props: true,
-    component: () => import('../views/HeroEdit.vue')
+    component: () => import(/* webpackChunkName: "Hero" */ '../views/HeroEdit.vue')
   },
 
   '/articles/create': {
     path: '/articles/create',
     name: 'ArticleCreate',
-    component: () => import('../views/ArticleEdit.vue')
+    component: () => import(/* webpackChunkName: "Article" */ '../views/ArticleEdit.vue')
   },
   '/articles/list': {
     path: '/articles/list',
     name: 'ArticleList',
-    component: () => import('../views/ArticleList.vue')
+    component: () => import(/* webpackChunkName: "Article" */ '../views/ArticleList.vue')
   },
   '/articles/edit/:id': {
     path: '/articles/edit/:id',
     name: 'ArticleEdit',
     props: true,
-    component: () => import('../views/ArticleEdit.vue')
+    component: () => import(/* webpackChunkName: "Article" */ '../views/ArticleEdit.vue')
   },
   '/videoes/create': {
     path: '/videoes/create',
     name: 'VideoCreate',
-    component: () => import('../views/VideoEdit.vue')
+    component: () => import(/* webpackChunkName: "Video" */ '../views/VideoEdit.vue')
   },
   '/videoes/list': {
     path: '/videoes/list',
     name: 'VideoList',
-    component: () => import('../views/VideoList.vue')
+    component: () => import(/* webpackChunkName: "Video" */ '../views/VideoList.vue')
   },
   '/videoes/edit/:id': {
     path: '/videoes/edit/:id',
     name: 'VideoEdit',
     props: true,
-    component: () => import('../views/VideoEdit.vue')
+    component: () => import(/* webpackChunkName: "Video" */ '../views/VideoEdit.vue')
   },
 
   '/ads/create': {
     path: '/ads/create',
     name: 'AdCreate',
-    component: () => import('../views/AdEdit.vue')
+    component: () => import(/* webpackChunkName: "Ad" */ '../views/AdEdit.vue')
   },
   '/ads/list': {
     path: '/ads/list',
     name: 'AdList',
-    component: () => import('../views/AdList.vue')
+    component: () => import(/* webpackChunkName: "Ad" */ '../views/AdList.vue')
   },
   '/ads/edit/:id': {
     path: '/ads/edit/:id',
     name: 'AdEdit',
     props: true,
-    component: () => import('../views/AdEdit.vue')
+    component: () => import(/* webpackChunkName: "Ad" */ '../views/AdEdit.vue')
   },
 
   '/roles/create': {
     path: '/roles/create',
     name: 'RoleCreate',
-    component: () => import('../views/permission/RoleEdit.vue')
+    component: () => import(/* webpackChunkName: "Role" */ '../views/permission/RoleEdit.vue')
   },
   '/roles/list': {
     path: '/roles/list',
     name: 'RoleList',
-    component: () => import('../views/permission/RoleList.vue')
+    component: () => import(/* webpackChunkName: "Role" */ '../views/permission/RoleList.vue')
   },
   '/roles/edit/:id': {
     path: '/roles/edit/:id',
     name: 'RoleEdit',
     props: true,
-    component: () => import('../views/permission/RoleEdit.vue')
+    component: () => import(/* webpackChunkName: "Role" */ '../views/permission/RoleEdit.vue')
   },
 
   '/menus/create': {
     path: '/menus/create',
     name: 'MenuCreate',
-    component: () => import('../views/menu/MenuEdit.vue')
+    component: () => import(/* webpackChunkName: "Menu" */ '../views/menu/MenuEdit.vue')
   },
   '/menus/list': {
     path: '/menus/list',
     name: 'MenuList',
-    component: () => import('../views/menu/MenuList.vue')
+    component: () => import(/* webpackChunkName: "Menu" */ '../views/menu/MenuList.vue')
   },
   '/menus/edit/:id': {
     path: '/menus/edit/:id',
     name: 'MenuEdit',
     props: true,
-    component: () => import('../views/menu/MenuEdit.vue')
+    component: () => import(/* webpackChunkName: "Menu" */ '../views/menu/MenuEdit.vue')
   },
 
   '/admin_webs/create': {
     path: '/admin_webs/create',
     name: 'AdminWebCreate',
-    component: () => import('../views/menu/AdminWebEdit.vue')
+    component: () => import(/* webpackChunkName: "AdminWeb" */ '../views/menu/AdminWebEdit.vue')
   },
   '/admin_webs/list': {
     path: '/admin_webs/list',
     name: 'AdminWebList',
-    component: () => import('../views/menu/AdminWebList.vue')
+    component: () => import(/* webpackChunkName: "AdminWeb" */ '../views/menu/AdminWebList.vue')
   },
   '/admin_webs/edit/:id': {
     path: '/admin_webs/edit/:id',
     name: 'AdminWebEdit',
     props: true,
-    component: () => import('../views/menu/AdminWebEdit.vue')
+    component: () => import(/* webpackChunkName: "AdminWeb" */ '../views/menu/AdminWebEdit.vue')
   },
   '/api_rights/create': {
     path: '/api_rights/create',
     name: 'ApiRightCreate',
-    component: () => import('../views/permission/ApiRightEdit.vue')
+    component: () => import(/* webpackChunkName: "ApiRight" */ '../views/permission/ApiRightEdit.vue')
   },
   '/api_rights/list': {
     path: '/api_rights/list',
     name: 'ApiRightList',
-    component: () => import('../views/permission/ApiRightList.vue')
+    component: () => import(/* webpackChunkName: "ApiRight" */ '../views/permission/ApiRightList.vue')
   },
   '/api_rights/edit/:id': {
     path: '/api_rights/edit/:id',
     name: 'ApiRightEdit',
     props: true,
-    component: () => import('../views/permission/ApiRightEdit.vue')
+    component: () => import(/* webpackChunkName: "ApiRight" */ '../views/permission/ApiRightEdit.vue')
   },
 
   '/admin_users/create': {
     path: '/admin_users/create',
     name: 'AdminUserCreate',
-    component: () => import('../views/AdminUserEdit.vue')
+    component: () => import(/* webpackChunkName: "AdminUser" */ '../views/AdminUserEdit.vue')
   },
   '/admin_users/list': {
     path: '/admin_users/list',
     name: 'AdminUserList',
-    component: () => import('../views/AdminUserList.vue')
+    component: () => import(/* webpackChunkName: "AdminUser" */ '../views/AdminUserList.vue')
   },
   '/admin_users/edit/:id': {
     path: '/admin_users/edit/:id',
     name: 'AdminUserEdit',
     props: true,
-    component: () => import('../views/AdminUserEdit.vue')
+    component: () => import(/* webpackChunkName: "AdminUser" */ '../views/AdminUserEdit.vue')
   }
 }
 
@@ -234,7 +234,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue'),
     meta: { isPublic: true }
   },
   {

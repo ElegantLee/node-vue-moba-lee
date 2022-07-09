@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  name: 'ListForm',
   props: {
     modelName: {
       required: true,

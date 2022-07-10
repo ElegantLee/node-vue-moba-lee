@@ -195,7 +195,7 @@ export default {
         })
         this.$router.push('/login')
       } else if (command === 'web') {
-        this.$router.push()
+        window.open('http://moba.elegantlee.top/web')
       } else if (command === 'github') {
         window.open('https://github.com/ElegantLee/node-vue-moba-lee/tree/main')
       }

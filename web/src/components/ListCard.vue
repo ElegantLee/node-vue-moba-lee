@@ -24,14 +24,14 @@
 <script>
 export default {
   props: {
-    sprite: {type: String, required: false},
-    icon: { type: String, required: true },
-    title: { type: String, required: true },
-    categories: { type: Array, required: true }
+    sprite: {type: String, required: false}, // 是否使用精灵图中的图标
+    icon: { type: String, required: true }, // 图标
+    title: { type: String, required: true }, // 标题
+    categories: { type: Array, required: true } // 显示的什么内容
   },
   data() {
     return {
-      active: 0
+      active: 0 // 控制选中高亮
     }
   }
 }

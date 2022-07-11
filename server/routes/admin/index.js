@@ -125,19 +125,20 @@ module.exports = app => {
   )
 
   /* 上传图片接口 */
-  const multer = require('multer')
-  const path = require('path')
-  // console.log(__dirname)
-  const destDir = path.join(__dirname, '/../../uploads')
-  // console.log(destDir)
-  const upload = multer({ dest: destDir })
+  const upload = require('../../plugins/upload.js')
+  // const multer = require('multer')
+  // const path = require('path')
+  // // console.log(__dirname)
+  // const destDir = path.join(__dirname, '/../../uploads')
+  // // console.log(destDir)
+  // const upload = multer({ dest: destDir })
   app.post(
     '/admin/api/upload',
     authMiddleware(),
     upload.single('file'),
     async (req, res) => {
       const file = req.file
-      file.url = `http:moba.elegantlee.top/uploads/${file.filename}`
+      file.url = `http://localhost:3000/uploads/${file.filename}`
       res.send(file)
     }
   )

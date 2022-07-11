@@ -17,7 +17,7 @@ if (isProd) {
     vue: 'Vue',
     'element-ui': 'ELEMENT',
     'vue-router': 'VueRouter',
-    'quill': 'Quill',
+    quill: 'Quill'
     // 'core-js': 'core-js'
     // 'vue2-editor': 'VueEditor'
   }
@@ -36,6 +36,20 @@ if (isProd) {
 }
 const title = 'node-vue-moba-admin'
 module.exports = {
+  // pages: {
+  //   index: {
+  //     entry: 'src/main.js',
+  //     template: 'public/index.html',
+  //     filename: 'index.html',
+  //     title: '王者荣耀后台管理系统'
+  //   },
+  //   page404: {
+  //     entry: 'src/main404.js',
+  //     template: 'public/404.html',
+  //     filename: '404.html',
+  //     title: '页面不存在'
+  //   }
+  // },
   // eslint-disable-next-line no-path-concat
   outputDir: __dirname + '/../server/admin', // 编译后的位置
   publicPath:
@@ -48,6 +62,14 @@ module.exports = {
       args[0].cdn = cdn
       return args
     })
+
+    /* 使用pug预编译html */
+    // config.module
+    //   .rule('pug')
+    //   .test(/\.pug$/)
+    //   .use('pug-html-loader')
+    //   .loader('pug-html-loader')
+    //   .end()
 
     if (process.env.use_analyzer) {
       // 分析

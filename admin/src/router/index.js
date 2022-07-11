@@ -309,9 +309,14 @@ const routes = [
     // ]
   },
   {
-    path: '*',
+    // 先定义404页面的路由，防止多次网页链接后出现路径丢失问题
+    path: '/404',
     name: 'NotFound',
-    component: () => import('../views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "Error-404" */ '../views/error/NotFound.vue')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 

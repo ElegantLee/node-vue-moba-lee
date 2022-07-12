@@ -12,7 +12,7 @@
         prop="name"
         :rules="{ required: true, message: '请输入广告名称', trigger: 'blur' }"
       >
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model.trim="model.name"></el-input>
       </el-form-item>
       <el-form-item label="广告">
         <el-button type="text" @click="model.items.push({})">
@@ -29,7 +29,7 @@
               :rules="{ required: true, message: '请输入图片的跳转链接', trigger: 'blur' }"
               label="跳转链接(URL)"
             >
-              <el-input v-model="item.url"></el-input>
+              <el-input v-model.trim="item.url"></el-input>
             </el-form-item>
             <el-form-item label="图片" style="margin-top: 0.5rem">
               <el-upload

@@ -9,10 +9,10 @@
       @submit.native.prevent="save"
     >
       <el-form-item prop="username" label="用户名">
-        <el-input v-model="model.username"></el-input>
+        <el-input v-model.trim="model.username"></el-input>
       </el-form-item>
       <el-form-item prop="password" label="密码">
-        <el-input type="password" v-model="model.password"></el-input>
+        <el-input type="password" v-model.trim="model.password"></el-input>
       </el-form-item>
       <el-form-item prop="role" label="角色">
         <el-select v-model="model.role">

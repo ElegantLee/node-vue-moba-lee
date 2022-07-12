@@ -10,7 +10,7 @@
     >
       <el-form-item prop="path" label="接口地址">
         <el-input
-          v-model="model.path"
+          v-model.trim="model.path"
           placeholder="输入API接口地址，前缀/admin/api不用填"
         ></el-input>
       </el-form-item>
@@ -47,7 +47,7 @@
       <el-form-item prop="description" label="描述">
         <el-input
           type="textarea"
-          v-model="model.description"
+          v-model.trim="model.description"
           placeholder="描述与接口方法对应，用、分隔"
         ></el-input>
       </el-form-item>

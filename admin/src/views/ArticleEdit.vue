@@ -19,7 +19,7 @@
         </el-select>
       </el-form-item>
       <el-form-item prop="title" label="标题">
-        <el-input v-model="model.title"></el-input>
+        <el-input v-model.trim="model.title"></el-input>
       </el-form-item>
       <el-form-item prop="body" label="详情">
         <vue-editor

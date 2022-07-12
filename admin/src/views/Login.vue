@@ -3,10 +3,10 @@
     <el-card header="管理员登录" class="login-card">
       <el-form ref="loginForm" :rules="loginRules" :model="loginForm" @submit.native.prevent="login" class="login-Form">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="el-icon-user-solid"></el-input>
+          <el-input v-model.trim="loginForm.username" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="loginForm.password" prefix-icon="el-icon-lock"></el-input>
+          <el-input type="password" v-model.trim="loginForm.password" prefix-icon="el-icon-lock"></el-input>
         </el-form-item>
         <el-form-item class="login-btns">
           <el-button type="primary" native-type="submit">登录</el-button>

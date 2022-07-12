@@ -22,7 +22,7 @@
         </el-select>
       </el-form-item>
       <el-form-item prop="name" label="名称">
-        <el-input v-model="model.name" placeholder="输入菜单名称"></el-input>
+        <el-input v-model.trim="model.name" placeholder="输入菜单名称"></el-input>
       </el-form-item>
       <el-form-item label="图标">
         <el-select
@@ -49,7 +49,7 @@
         ></el-switch>
       </el-form-item>
       <el-form-item prop="description" label="描述">
-        <el-input type="textarea" v-model="model.description"></el-input>
+        <el-input type="textarea" v-model.trim="model.description"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>

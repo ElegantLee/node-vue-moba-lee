@@ -9,10 +9,10 @@
       @submit.native.prevent="save"
     >
       <el-form-item label="名称" prop="name">
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model.trim="model.name"></el-input>
       </el-form-item>
       <el-form-item label="描述" prop="description">
-        <el-input type="textarea" v-model="model.description"></el-input>
+        <el-input type="textarea" v-model.trim="model.description"></el-input>
       </el-form-item>
       <el-form-item>
         <el-tabs type="border-card">

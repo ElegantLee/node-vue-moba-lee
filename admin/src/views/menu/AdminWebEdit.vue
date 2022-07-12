@@ -9,10 +9,10 @@
       @submit.native.prevent="save"
     >
       <el-form-item prop="name" label="名称">
-        <el-input v-model="model.name" placeholder="以 页面 两个字结尾"></el-input>
+        <el-input v-model.trim="model.name" placeholder="以 页面 两个字结尾"></el-input>
       </el-form-item>
       <el-form-item prop="path" label="页面地址">
-        <el-input v-model="model.path" placeholder="输入页面的路由地址"></el-input>
+        <el-input v-model.trim="model.path" placeholder="输入页面的路由地址"></el-input>
       </el-form-item>
       <el-form-item prop="menu" label="所属菜单">
         <el-select
@@ -44,7 +44,7 @@
       <el-form-item prop="description" label="描述">
         <el-input
           type="textarea"
-          v-model="model.description"
+          v-model.trim="model.description"
           placeholder="描述"
         ></el-input>
       </el-form-item>

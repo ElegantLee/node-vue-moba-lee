@@ -5,8 +5,9 @@ module.exports = app => {
     getSkipFields
   } = require('../../utils/utils')
   const router = express.Router({
-    mergeParams: true
+    mergeParams: true // 合并来自父路由的params, 可以从子路由访问到父路由的params
   })
+  const permissionMiddleware = require('../../middlewares/permission') // 接口权限处理中间件
   const jwt = require('jsonwebtoken')
   const assert = require('http-assert')
   const AdminUser = require('../../models/AdminUser')
@@ -14,7 +15,7 @@ module.exports = app => {
   const Role = require('../../models/Role')
 
   // TODO: 铭文数据初始化
-  router.get('/runes', async (req, res) => {
+  router.get('/runes', permissionMiddleware(), async (req, res) => {
     const data = Rune.insertMany()
     res.send(data)
   })
@@ -22,13 +23,13 @@ module.exports = app => {
   /* 查询上一级菜单 */
 
   /* 接口-新建数据 */
-  router.post('/', async (req, res) => {
+  router.post('/', permissionMiddleware(), async (req, res) => {
     const model = await req.Model.create(req.body)
     res.send(model)
   })
 
   /* 接口-查询数据列表 */
-  router.get('/', async (req, res) => {
+  router.get('/', permissionMiddleware(), async (req, res) => {
     // .populate('parent') --- 关联查询，查找关联的parent字段
     /* 针对某个集合设置特殊操作 */
     // console.log(req.user)
@@ -80,13 +81,13 @@ module.exports = app => {
   })
 
   /* 接口-根据id查询数据 */
-  router.get('/:id', async (req, res) => {
+  router.get('/:id', permissionMiddleware(), async (req, res) => {
     const item = await req.Model.findById(req.params.id)
     res.send(item)
   })
 
   /* 接口-更新数据 */
-  router.put('/:id', async (req, res) => {
+  router.put('/:id', permissionMiddleware(), async (req, res) => {
     const item = await req.Model.findByIdAndUpdate(
       req.params.id,
       req.body
@@ -95,7 +96,7 @@ module.exports = app => {
   })
 
   /* 接口-根据id删除数据 */
-  router.delete('/:id', async (req, res) => {
+  router.delete('/:id', permissionMiddleware(), async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id)
     res.send({
       success: true
@@ -103,7 +104,7 @@ module.exports = app => {
   })
 
   /* 删除已选中的数据 */
-  router.delete('/', async (req, res) => {
+  router.delete('/', permissionMiddleware(), async (req, res) => {
     const selectionList = req.body
     // console.log(selectionList)
     await req.Model.deleteMany({ _id: { $in: selectionList } })
@@ -135,6 +136,7 @@ module.exports = app => {
   app.post(
     '/admin/api/upload',
     authMiddleware(),
+    permissionMiddleware(),
     upload.single('file'),
     async (req, res) => {
       const file = req.file
@@ -179,16 +181,18 @@ module.exports = app => {
     authMiddleware(),
     async (req, res) => {
       const user = req.user
-      const role = await Role.find({_id: user.role}).populate({
-        path: 'adminWebs.web',
-        populate: {
-          path: 'menu',
+      const role = await Role.find({ _id: user.role })
+        .populate({
+          path: 'adminWebs.web',
           populate: {
-            path: 'parent',
-            populate: 'parent'
+            path: 'menu',
+            populate: {
+              path: 'parent',
+              populate: 'parent'
+            }
           }
-        }
-      }).lean()
+        })
+        .lean()
       // console.log(role)
       user.adminWebs = role[0].adminWebs
       // Object.defineProperty(user, 'adminWebs', role[0].adminWebs)

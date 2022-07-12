@@ -19,7 +19,7 @@
         </el-select>
       </el-form-item>
       <el-form-item prop="name" label="名称">
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model.trim="model.name"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>

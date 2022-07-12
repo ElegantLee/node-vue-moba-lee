@@ -19,13 +19,13 @@
         </el-select>
       </el-form-item>
       <el-form-item prop="title" label="标题">
-        <el-input type="textarea" v-model="model.title"></el-input>
+        <el-input type="textarea" v-model.trim="model.title"></el-input>
       </el-form-item>
       <el-form-item prop="url" label="链接">
-        <el-input v-model="model.url"></el-input>
+        <el-input v-model.trim="model.url"></el-input>
       </el-form-item>
       <el-form-item prop="fre" label="点击率">
-        <el-input v-model="model.fre"></el-input>
+        <el-input v-model.trim="model.fre"></el-input>
       </el-form-item>
       <el-form-item prop="date" label="发布日期">
         <el-date-picker type="date" placeholder="选择发布日期" v-model="model.date"></el-date-picker>

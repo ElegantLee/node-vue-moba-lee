@@ -11,7 +11,7 @@
       <el-tabs value="basic" type="border-card">
         <el-tab-pane label="基本信息" name="basic">
           <el-form-item prop="name" label="名称">
-            <el-input v-model="model.name"></el-input>
+            <el-input v-model.trim="model.name"></el-input>
           </el-form-item>
           <el-form-item prop="avatar" label="图标">
             <el-upload
@@ -46,7 +46,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item prop="title" label="称号">
-            <el-input v-model="model.title"></el-input>
+            <el-input v-model.trim="model.title"></el-input>
           </el-form-item>
           <el-form-item prop="categories" label="类型">
             <el-select v-model="model.categories" multiple>
@@ -87,13 +87,13 @@
             </el-select>
           </el-form-item>
           <el-form-item prop="usageTips" label="使用技巧">
-            <el-input type="textarea" v-model="model.usageTips"></el-input>
+            <el-input type="textarea" v-model.trim="model.usageTips"></el-input>
           </el-form-item>
           <el-form-item prop="battleTips" label="对抗技巧">
-            <el-input type="textarea" v-model="model.battleTips"></el-input>
+            <el-input type="textarea" v-model.trim="model.battleTips"></el-input>
           </el-form-item>
           <el-form-item prop="teamTips" label="团战思路">
-            <el-input type="textarea" v-model="model.teamTips"></el-input>
+            <el-input type="textarea" v-model.trim="model.teamTips"></el-input>
           </el-form-item>
           <el-form-item prop="scores.difficult" label="难度">
             <el-rate
@@ -143,7 +143,7 @@
                 :rules="{required: true, message: '请输入技能名称', trigger: 'blur'}"
                 label="名称"
               >
-                <el-input v-model="item.name"></el-input>
+                <el-input v-model.trim="item.name"></el-input>
               </el-form-item>
               <el-form-item
                 :prop="'skills.' + index + '.icon'"
@@ -170,28 +170,28 @@
                 :rules="{required: true, message: '请输入技能的冷却值', trigger: 'blur'}"
                 label="冷却值"
               >
-                <el-input v-model="item.delay"></el-input>
+                <el-input v-model.trim="item.delay"></el-input>
               </el-form-item>
               <el-form-item
                 :prop="'skills.' + index + '.cost'"
                 :rules="{required: true, message: '请输入技能的消耗', trigger: 'blur'}"
                 label="消耗"
               >
-                <el-input v-model="item.cost"></el-input>
+                <el-input v-model.trim="item.cost"></el-input>
               </el-form-item>
               <el-form-item
                 :prop="'skills.' + index + '.description'"
                 :rules="{required: true, message: '请输入技能描述', trigger: 'blur'}"
                 label="描述"
               >
-                <el-input v-model="item.description" type="textarea"></el-input>
+                <el-input v-model.trim="item.description" type="textarea"></el-input>
               </el-form-item>
               <el-form-item
                 :prop="'skills.' + index + '.tips'"
                 :rules="{required: true, message: '请输入技能小提示', trigger: 'blur'}"
                 label="小提示"
               >
-                <el-input v-model="item.tips" type="textarea"></el-input>
+                <el-input v-model.trim="item.tips" type="textarea"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button
@@ -236,7 +236,7 @@
                 label="描述"
               >
                 <el-input
-                  v-model="model.partners[index].description"
+                  v-model.trim="model.partners[index].description"
                   type="textarea"
                 ></el-input>
               </el-form-item>

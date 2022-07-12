@@ -9,7 +9,7 @@
       @submit.native.prevent="save"
     >
       <el-form-item prop="name" label="名称">
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model.trim="model.name"></el-input>
       </el-form-item>
       <el-form-item prop="icon" label="图标">
         <el-upload

@@ -12,17 +12,30 @@
         <img class="w-100" src="../assets/images/slid3.jpeg" alt />
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-pagination pagination-home text-right px-3 pb-1" slot="pagination"></div>
+      <div
+        class="swiper-pagination pagination-home text-right px-3 pb-1"
+        slot="pagination"
+      ></div>
       <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div> -->
+      <div class="swiper-button-next" slot="button-next"></div>-->
       <div class="swiper-scrollbar" slot="scrollbar"></div>
     </swiper>
     <!-- end of swiper -->
-    <div class="nav-icons bg-white mt-3 text-center pt-3 text-grey" :class="{ 'nav-collapse': navCollapse}">
+    <div
+      class="nav-icons bg-white mt-3 text-center pt-3 text-grey"
+      :class="{ 'nav-collapse': navCollapse}"
+    >
       <div class="nav-list d-flex flex-wrap">
-        <div class="nav-item mb-3" v-for="(spriteItem, index) in spriteItems" :key="index">
+        <div
+          class="nav-item mb-3"
+          v-for="(spriteItem, index) in spriteItems"
+          :key="index"
+        >
           <a :href="spriteItem.url">
-            <i class="sprite" :class="`sprite-${spriteItem.positionName}`"></i>
+            <i
+              class="sprite"
+              :class="`sprite-${spriteItem.positionName}`"
+            ></i>
           </a>
           <div class="py-1 fs-sm">{{spriteItem.name}}</div>
         </div>
@@ -44,8 +57,13 @@
         >
           <span class="text-info">[{{ news.categoryName }}]</span>
           <span class="px-2">|</span>
-          <span class="flex-grow-1 text-dark text-ellipsis pr-2" style="width: 0">{{ news.title }}</span>
-          <span class="text-grey-1 fs-sm">{{ news.createdAt | newsDate }}</span>
+          <span
+            class="flex-grow-1 text-dark text-ellipsis pr-2"
+            style="width: 0"
+          >{{ news.title }}</span>
+          <span
+            class="text-grey-1 fs-sm"
+          >{{ news.createdAt | newsDate }}</span>
         </router-link>
       </template>
     </m-list-card>
@@ -67,10 +85,20 @@
       </template>
     </m-list-card>
 
-    <m-list-card sprite="sprite-video" icon="hero" title="精彩视频" :categories="videoCats">
+    <m-list-card
+      sprite="sprite-video"
+      icon="hero"
+      title="精彩视频"
+      :categories="videoCats"
+    >
       <template #items="{ category }">
         <div class="d-flex flex-wrap">
-          <div v-for="(video, index) in category.videoList" :key="index" class="p-2" style="width: 50%">
+          <div
+            v-for="(video, index) in category.videoList"
+            :key="index"
+            class="p-2"
+            style="width: 50%"
+          >
             <a :href="video.url" target="_blank" class="text-dark">
               <img :src="video.cover" class="w-100" />
               <div class="video-title pt-2">{{ video.title }}</div>
@@ -90,7 +118,10 @@
       <div class="btwz-icons bg-white text-center">
         <div class="btwz-list d-flex flex-wrap">
           <div class="btwz-item mt-1">
-            <a href="https://wangzhe.recogame.com/wangzhe.html" class="pt-1">
+            <a
+              href="https://wangzhe.recogame.com/wangzhe.html"
+              class="pt-1"
+            >
               <i class="sprite sprite-lywzk"></i>
             </a>
             <div class="pt-1 fs-sm">龙翼王者卡</div>

@@ -33,7 +33,7 @@ if (isProd) {
       'https://unpkg.com/vue-router@3.2.0/dist/vue-router.js',
       'https://unpkg.com/element-ui/lib/index.js', // element
       'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js', // vue-awesome-swiper依赖swiper，因此在vue-awesome-swiper之前引入
-      'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
+      'https://unpkg.com/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.js'
     ]
   }
 }

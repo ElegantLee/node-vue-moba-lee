@@ -1,5 +1,5 @@
 # node-vue-moba-lee
-仿王者荣耀移动端官网，整个项目包括了移动端、后台管理端和服务端，是一个较全面的全栈项目。感谢B站up主—[全栈之巅](https://space.bilibili.com/341919508/video?tid=0&page=1&keyword=&order=pubdate)制作的视频。
+仿王者荣耀移动端官网，整个项目包括了移动端、后台管理端和服务端，是一个较全面的全栈项目。
 
 项目在线体验地址：
 
@@ -159,3 +159,4 @@ webpack提供的代码分离功能，配合动态导入（import）、配置`web
 * [MongoDB 中的关联查询MongoDB : aggregate/lookup 对比 Mongoose : ref / populate](https://blog.csdn.net/sinat_31057219/article/details/119140589)
 * [MonGoDB中文手册](https://mongodb.net.cn/manual/reference/operator/aggregation/lookup/)
 * [MongoDB 菜鸟教程](https://www.runoob.com/mongodb/mongodb-aggregate.html)
+* [全栈之巅](https://space.bilibili.com/341919508/video?tid=0&page=1&keyword=&order=pubdate)

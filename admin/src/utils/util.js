@@ -40,7 +40,7 @@ function makeWebTree(adminWebs, isTree) {
     }
   })
 
-  const obj = {} // 记录这个页面的分类是否已经添加
+  const obj = {} // 记录这个页面的分类是否已经添加 (Hash 表)
   // 找到侧边栏的所有菜单
   const uniqueCate = hasMenu.reduce((arr, item) => {
     let category = item.menu.parent.parent // 这里有一定局限性，只是页面设计是只有二级菜单

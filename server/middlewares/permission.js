@@ -22,9 +22,9 @@ module.exports = options => {
         path = path.replace(':id', req.params.id)
       }
 
-      console.log(path)
-      console.log(originalUrl)
-      console.log(originalRight)
+      // console.log(path)
+      // console.log(originalUrl)
+      // console.log(originalRight)
       return (
         path === originalUrl &&
         apiRight.rights.indexOf(originalRight.toUpperCase()) !== -1

@@ -187,8 +187,8 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'logout') {
-        localStorage.removeItem('token')
-        localStorage.removeItem('adminWebs')
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('adminWebs')
         this.$message({
           type: 'success',
           message: '注销成功'

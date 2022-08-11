@@ -57,7 +57,7 @@ export default {
   methods: {
     async login() {
       const res = await this.$http.post('login', this.loginForm)
-      sessionStorage.setItem('token', res.data.token) // token持久化
+      localStorage.setItem('token', res.data.token) // token持久化
       // console.log(res.data)
       this.$message({
         type: 'success',

@@ -26,6 +26,8 @@ Vue.prototype.$http = axios.create({
   // baseURL: 'http://localhost:3000/web/api'
 })
 
+const width = document.body
+
 new Vue({
   router,
   render: h => h(App)

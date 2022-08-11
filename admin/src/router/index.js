@@ -330,7 +330,7 @@ router.beforeEach((to, from, next) => {
   // console.log(to)
   // console.log(from)
   /* 要访问的页面不是公开访问的页面，且用户没有登录，则跳转到登录页 */
-  if (!to.meta.isPublic && !sessionStorage.token) {
+  if (!to.meta.isPublic && !localStorage.token) {
     Vue.prototype.$message({ type: 'error', message: '请先登录' })
     next('/login')
   } else if (to.params.id && from.meta.rights) {
@@ -368,7 +368,7 @@ router.$addRoutes = routes => {
  * @returns
  */
 export function initDynamicRoutes() {
-  if (sessionStorage.token && sessionStorage.adminWebs) {
+  if (localStorage.token && localStorage.adminWebs) {
     /* 找到main页面在动态路由表中的索引位置 */
     let mainRouteIndex = 0
     const routes = router.options.routes
@@ -379,7 +379,7 @@ export function initDynamicRoutes() {
     })
 
     /* 根据用户角色的页面访问权限生成路由表，并动态添加到路由中 */
-    const adminWebs = JSON.parse(sessionStorage.getItem('adminWebs'))
+    const adminWebs = JSON.parse(localStorage.getItem('adminWebs'))
     routes[mainRouteIndex].children = []
     adminWebs.forEach(adminWeb => {
       let newAdminWeb = routerMapping[adminWeb.web.path]

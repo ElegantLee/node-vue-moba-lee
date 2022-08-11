@@ -10,8 +10,8 @@ const http = axios.create({
 http.interceptors.request.use(
   function (config) {
     /* 请求注入token */
-    if (sessionStorage.token) {
-      config.headers.Authorization = 'Bearer ' + (sessionStorage.token || '') // Bearer是规范，token可能为空
+    if (localStorage.token) {
+      config.headers.Authorization = 'Bearer ' + (localStorage.token || '') // Bearer是规范，token可能为空
     }
     return config
   },

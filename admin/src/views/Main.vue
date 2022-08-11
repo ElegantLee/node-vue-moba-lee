@@ -187,8 +187,8 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'logout') {
-        sessionStorage.removeItem('token')
-        sessionStorage.removeItem('adminWebs')
+        localStorage.removeItem('token')
+        localStorage.removeItem('adminWebs')
         this.$message({
           type: 'success',
           message: '注销成功'
@@ -205,7 +205,7 @@ export default {
       const res = await this.$http.get('/user_info')
       this.adminUser = res.data
       // console.log(res.data.adminWebs)
-      sessionStorage.setItem('adminWebs', JSON.stringify(res.data.adminWebs)) // 页面访问权限持久化
+      localStorage.setItem('adminWebs', JSON.stringify(res.data.adminWebs)) // 页面访问权限持久化
       initDynamicRoutes() // 添加动态路由表
     }
   },

@@ -9,9 +9,9 @@
     />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <!-- 引入CDN样式---css -->
-    <!-- <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
+    <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
     <link rel="stylesheet" href="<%=css%>" />
-    <% } %> -->
+    <% } %>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -26,8 +26,8 @@
     <!-- built files will be auto injected -->
 
     <!-- 引入CDN的脚本---js -->
-    <!-- <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+    <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
     <script src="<%=js%>"></script>
-    <% } %> -->
+    <% } %>
   </body>
 </html>

@@ -91,7 +91,7 @@ module.exports = {
     },
     // 要排除的包名
     // key---要排除的包名，value---引入的CDN文件中的全局变量名
-    // externals: externals
+    externals: externals
     // devtool: 'souce-map' // VS Code调试
   }
 };
